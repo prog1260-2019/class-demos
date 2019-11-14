@@ -17,6 +17,39 @@ List::~List()
 	}
 }
 
+void* List::getFirst() {
+	return head;
+}
+
+void* List::getLast() {
+	return tail;
+}
+
+void* List::getNext(void* p) {
+	if (p)
+		return ((Node*)p)->next;
+	else
+		return nullptr;
+}
+
+void* List::getPrev(void* p) {
+	if (p)
+		return ((Node*)p)->prev;
+	else
+		return nullptr;
+}
+
+ 
+int List::getData(void* p) {
+	return ((Node*)p)->data;
+}
+
+void List::deleteAt(void*) {}
+void List::insertBefore(int, void*) {}
+
+
+
+
 void List::push_front(int n)
 {
 	Node* newNode = new Node(n, nullptr, head);
