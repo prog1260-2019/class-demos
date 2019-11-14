@@ -5,11 +5,12 @@
 
 #include <iostream>
 #include "Stack.h"
+#include "Queue.h"
 
 int main()
 {
 	{
-		Stack s;
+		Queue s;
 
 		for (int i = 0; i < 100; ++i)
 		{
