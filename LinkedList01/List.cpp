@@ -84,9 +84,7 @@ int List::pop_front()
 		head = cur->next; 
 		head->prev = nullptr;
 	}
-
 	delete cur;
-
 	size_--;
 	return tmp;
 }

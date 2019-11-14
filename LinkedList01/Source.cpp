@@ -10,7 +10,7 @@
 int main()
 {
 	{
-		Queue s;
+		Stack s;
 
 		for (int i = 0; i < 100; ++i)
 		{
