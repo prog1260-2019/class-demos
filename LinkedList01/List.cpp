@@ -2,7 +2,7 @@
 #include <sstream>
 #include <iostream>
 
-List::List() : size_(0), head(nullptr)
+List::List() : size_(0), head(nullptr), tail(nullptr)
 {
 }
 
@@ -19,29 +19,30 @@ List::~List()
 
 void List::push_front(int n)
 {
-	Node* newNode = new Node();
-
-	newNode->next = head;
-	newNode->data = n;
+	Node* newNode = new Node(n, nullptr, head);
+    
+	if (head == nullptr) {
+		head = newNode;
+		tail = newNode;
+	}
+	else {
+		head->prev = newNode;
+		head = newNode;
+	}
 	size_++;
-	head = newNode;
 }
 
 void List::push_back(int n)
 {
-	Node* newNode = new Node();
-	newNode->data = n;
-	newNode->next = nullptr;
+	Node* newNode = new Node(n, tail, nullptr);
 
 	if (head == nullptr) {
 		head = newNode;
+		tail = newNode;
 	}
 	else {
-		Node* current = head;
-		while (current->next) {
-			current = current->next;
-		}
-		current->next = newNode;
+		tail->next = newNode;
+		tail = newNode;
 	}
 	size_++;
 }
@@ -67,14 +68,24 @@ std::string List::toString()
 
 int List::pop_front()
 {
-	if (head == nullptr) {
-		return 0;
+	if (head == nullptr) {  // no Nodes on list
+		throw std::out_of_range{ "attempt to pop empty list" };
 	}
-	int tmp = head->data;
 
-	Node* deleteMe = head;
-	head = head->next;
-	delete deleteMe;
+	int tmp = head->data;
+	Node* cur = head;
+
+
+	if (tail == head) {  // only one Node on list
+		tail = nullptr;
+		head = nullptr;
+	}
+	else {
+		head = cur->next; 
+		head->prev = nullptr;
+	}
+
+	delete cur;
 
 	size_--;
 	return tmp;

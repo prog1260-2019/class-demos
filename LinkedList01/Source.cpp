@@ -22,7 +22,6 @@ int main()
 			std::cout << s.pop() << ", ";
 		}
 		std::cout << "\n\n" << "destroyed " << Node::destroyed << '\n';
-
 		std::cout << "\n\n" << "created " << Node::created << '\n';
 	}
 }
