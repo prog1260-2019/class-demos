@@ -20,8 +20,16 @@ int main()
 		std::cout << s.toString();
 		
 		void* n = s.getFirst();
-		std::cout << "\n\nFirst: " << s.getData(n) << "\n";
-		std::cout << "Next: " << s.getData(s.getNext(n)) << "\n";
+		s.insertBefore(42, n);
+
+		n = s.getNext(n);
+		n = s.getNext(n);
+
+		std::cout << "\n\nData: " << s.getDataAt(n) << "\n";
+		 
+		s.insertBefore(73, n);
+
+		std::cout << s.toString() << '\n';
 		
 	}
 

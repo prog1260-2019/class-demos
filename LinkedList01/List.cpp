@@ -39,21 +39,52 @@ void* List::getPrev(void* p) {
 		return nullptr;
 }
 
- 
-int List::getData(void* p) {
+
+int List::getDataAt(void* p) {
 	return ((Node*)p)->data;
 }
 
-void List::deleteAt(void*) {}
-void List::insertBefore(int, void*) {}
+void List::deleteAt(void* p) {
+	Node* cur = (Node*) p;
+	if (cur == nullptr)
+		throw std::out_of_range{ "deleteAt invalid node" };
+
+	if (cur == head) {  // first node
+		pop_front();
+	}
+	else if (cur == tail) {  // last node
+		pop_back();
+	}
+	else {  
+		cur->prev->next = cur->next;
+		cur->next->prev = cur->prev;
+	}
+
+	delete cur;
+}
+
+void List::insertBefore(int n, void* p) {
+	Node* cur = (Node*)p;
+
+	if (cur == nullptr)
+		throw std::out_of_range{ "deleteAt invalid node" };
 
 
+	if (cur == head) {
+		push_front(n);
+	}
+	else {
+		Node* newNode = new Node(n, cur->prev, cur); // data, prev, next
+		newNode->prev->next = newNode;
+		newNode->next->prev = newNode;
+	}
+}
 
 
 void List::push_front(int n)
 {
 	Node* newNode = new Node(n, nullptr, head);
-    
+
 	if (head == nullptr) {
 		head = newNode;
 		tail = newNode;
@@ -88,7 +119,7 @@ int List::size()
 std::string List::toString()
 {
 	std::stringstream ss;
-	Node* current = head; 
+	Node* current = head;
 
 	while (current != nullptr)
 	{
@@ -114,9 +145,35 @@ int List::pop_front()
 		head = nullptr;
 	}
 	else {
-		head = cur->next; 
+		head = cur->next;
 		head->prev = nullptr;
 	}
+	delete cur;
+	size_--;
+	return tmp;
+}
+
+
+
+int List::pop_back()
+{
+	if (tail == nullptr) {  // no Nodes on list
+		throw std::out_of_range{ "attempt to pop empty list" };
+	}
+
+	int tmp = tail->data;
+	Node* cur = tail;
+
+
+	if (tail == head) {  // only one Node on list
+		tail = nullptr;
+		head = nullptr;
+	}
+	else {
+		tail = cur->prev;
+		tail->next = nullptr;
+	}
+
 	delete cur;
 	size_--;
 	return tmp;

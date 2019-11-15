@@ -11,13 +11,15 @@ public:
 	void push_front(int n);
 	void push_back(int n);
 	int pop_front();
+	int pop_back();
+
 	
 	void* getFirst();
 	void* getLast();
 	void* getNext(void*);
 	void* getPrev(void*);
 
-	int getData(void*);
+	int getDataAt(void*);
 	void deleteAt(void*);
 	void insertBefore(int, void*);
 
