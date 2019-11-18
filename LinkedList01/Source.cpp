@@ -6,23 +6,27 @@
 #include <iostream>
 #include "Stack.h"
 #include "Queue.h"
+#include "List.h"
 
 int main()
 {
 	{
-		Queue s;
+		List l;
 
 		for (int i = 0; i < 100; ++i)
 		{
-			s.push(i);
+			l.push_front(i);
 		}
 
-		//std::cout << list.toString();
-		while (s.size()) {
-			std::cout << s.pop() << ", ";
+		Node* cur = l.getLast();
+		while (cur) {
+			std::cout << l.getDataAtNode(cur) << ", ";
+			cur = l.getPrev(cur);
 		}
+
 		std::cout << "\n\n" << "destroyed " << Node::destroyed << '\n';
-
 		std::cout << "\n\n" << "created " << Node::created << '\n';
 	}
+	std::cout << "\n\n" << "destroyed " << Node::destroyed << '\n';
+
 }
