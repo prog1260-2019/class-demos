@@ -1,6 +1,7 @@
 #include "List.h"
 #include <sstream>
 #include <iostream>
+#include <stdexcept>
 
 List::List() : size_(0), head(nullptr)
 {
@@ -19,29 +20,34 @@ List::~List()
 
 void List::push_front(int n)
 {
-	Node* newNode = new Node();
+	Node* newNode = new Node(n, nullptr, nullptr);
 
-	newNode->next = head;
-	newNode->data = n;
+	if (head == nullptr) {
+		head = newNode;
+		tail = newNode;
+	}
+	else {
+		newNode->next = head;
+		head->prev = newNode;
+		head = newNode;
+	}
+	 
 	size_++;
-	head = newNode;
+	 
 }
 
 void List::push_back(int n)
 {
-	Node* newNode = new Node();
-	newNode->data = n;
-	newNode->next = nullptr;
+	Node* newNode = new Node(n, nullptr, nullptr);
+	 
 
-	if (head == nullptr) {
+	if (head == 0) {
 		head = newNode;
-	}
-	else {
-		Node* current = head;
-		while (current->next) {
-			current = current->next;
-		}
-		current->next = newNode;
+		tail = newNode;
+	} else {
+		tail->next = newNode;
+		newNode->prev = tail;
+		tail = newNode;
 	}
 	size_++;
 }
@@ -67,17 +73,59 @@ std::string List::toString()
 
 int List::pop_front()
 {
-	if (head == nullptr) {
-		return 0;
+	if (size_ == 0) {
+		throw std::out_of_range("Tried to pop empty list");
 	}
+
 	int tmp = head->data;
+	Node* cur = head;
 
-	Node* deleteMe = head;
-	head = head->next;
-	delete deleteMe;
+	if (size_ == 1) {
+		tail = nullptr;
+		head = nullptr;
+	}
+	else {
+		head = head->next;
+		head->prev = nullptr;
+	}
 
+	delete cur;
 	size_--;
 	return tmp;
+}
+
+Node* List::getFirst()
+{
+	return head;
+}
+
+Node* List::getLast()
+{
+	return tail;
+}
+
+Node* List::getNext(Node* cur)
+{
+	if (cur)
+		return cur->next;
+	else
+		throw std::invalid_argument("getNext nullptr exception");
+}
+
+Node* List::getPrev(Node* cur)
+{
+	if (cur)
+		return cur->prev;
+	else
+		throw std::invalid_argument("getPrev nullptr exception");
+}
+
+int List::getDataAtNode(Node* cur)
+{
+	if (cur)
+		return cur->data;
+	else
+		throw std::invalid_argument("getDataAt nullptr exception");
 }
 
 

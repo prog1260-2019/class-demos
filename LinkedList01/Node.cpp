@@ -8,6 +8,11 @@ Node::Node()
 	Node::created++;
 }
 
+Node::Node(int data, Node* prev, Node* next) : data(data), prev(prev), next(next)
+{
+	Node::created++;
+}
+
 Node::~Node()
 {
 	Node::destroyed++;

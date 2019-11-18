@@ -1,11 +1,7 @@
-//
-//
-//
 #pragma once
-
 #include "List.h"
-
-class Queue {
+class Stack
+{
 public:
 	void push(int n);
 	int pop();
@@ -14,3 +10,4 @@ public:
 private:
 	List list;
 };
+

@@ -4,37 +4,29 @@
 //
 
 #include <iostream>
-#include"List.h"
+#include "Stack.h"
+#include "Queue.h"
+#include "List.h"
 
 int main()
 {
 	{
-		List list;
+		List l;
 
 		for (int i = 0; i < 100; ++i)
 		{
-			list.push_front(i);
+			l.push_front(i);
 		}
 
-		//std::cout << list.toString();
-		list.display();
+		Node* cur = l.getLast();
+		while (cur) {
+			std::cout << l.getDataAtNode(cur) << ", ";
+			cur = l.getPrev(cur);
+		}
 
+		std::cout << "\n\n" << "destroyed " << Node::destroyed << '\n';
 		std::cout << "\n\n" << "created " << Node::created << '\n';
-		std::cout << "size: " << list.size() << " deleted " << Node::destroyed << '\n';
-
-
-		std::cout << "front is: " <<  list.pop_front() << '\n';
-		std::cout << "size: " << list.size() <<  " deleted " << Node::destroyed << '\n';
-
-		std::cout << "front is: " << list.pop_front() << '\n';
-		std::cout << "size: " << list.size() << " deleted " << Node::destroyed << '\n';
-
-		std::cout << "front is: " << list.pop_front() << '\n';
-		std::cout << "size: " << list.size() << " deleted " << Node::destroyed << '\n';
-
-		std::cout << "front is: " << list.pop_front() << '\n';
-		std::cout << "size: " << list.size() << " deleted " << Node::destroyed << '\n';
 	}
-	
-	std::cout << "deleted " << Node::destroyed << '\n';
+	std::cout << "\n\n" << "destroyed " << Node::destroyed << '\n';
+
 }
