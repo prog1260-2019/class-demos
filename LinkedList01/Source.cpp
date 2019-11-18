@@ -6,6 +6,7 @@
 #include <iostream>
 #include "Stack.h"
 #include "Queue.h"
+#include "List.h"
 
 int main()
 {
@@ -24,7 +25,11 @@ int main()
 
 		n = s.getNext(n);
 		n = s.getNext(n);
+		n = s.getNext(n);
 
+		void* tmp = s.getNext(n);
+		s.deleteAt(n);
+		n = tmp;
 		std::cout << "\n\nData: " << s.getDataAt(n) << "\n";
 		 
 		s.insertBefore(73, n);
