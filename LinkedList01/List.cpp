@@ -181,39 +181,7 @@ int List::pop_back()
 	return tmp;
 }
 
-Node* List::getFirst()
-{
-	return head;
-}
 
-Node* List::getLast()
-{
-	return tail;
-}
-
-Node* List::getNext(Node* cur)
-{
-	if (cur)
-		return cur->next;
-	else
-		throw std::invalid_argument("getNext nullptr exception");
-}
-
-Node* List::getPrev(Node* cur)
-{
-	if (cur)
-		return cur->prev;
-	else
-		throw std::invalid_argument("getPrev nullptr exception");
-}
-
-int List::getDataAtNode(Node* cur)
-{
-	if (cur)
-		return cur->data;
-	else
-		throw std::invalid_argument("getDataAt nullptr exception");
-}
 
 
 void List::display()

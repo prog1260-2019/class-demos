@@ -23,15 +23,6 @@ public:
 	void deleteAt(void*);
 	void insertBefore(int, void*);
 
-	Node* getFirst();
-	Node* getLast();
-	Node* getNext(Node*);
-	Node* getPrev(Node*);
-	int   getDataAtNode(Node*);
-
-	void  insertBefore(int, Node*);
-	void  deleteNode(Node*);
-
 	int size();
 	std::string toString();
 	void display(); 

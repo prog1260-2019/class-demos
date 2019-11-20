@@ -11,30 +11,30 @@
 int main()
 {
 	{
-		List s;
+		List list;
 
 		for (int i = 0; i < 10; ++i)
 		{
-			s.push_back(i);
+			list.push_back(i);
 		}
 
-		std::cout << s.toString();
+		std::cout << list.toString();
 		
-		void* n = s.getFirst();
-		s.insertBefore(42, n);
+		void* n = list.getFirst();
+		list.insertBefore(42, n);
 
-		n = s.getNext(n);
-		n = s.getNext(n);
-		n = s.getNext(n);
+		n = list.getNext(n);
+		n = list.getNext(n);
+		n = list.getNext(n);
 
-		void* tmp = s.getNext(n);
-		s.deleteAt(n);
+		void* tmp = list.getNext(n);
+		list.deleteAt(n);
 		n = tmp;
-		std::cout << "\n\nData: " << s.getDataAt(n) << "\n";
+		std::cout << "\n\nData: " << list.getDataAt(n) << "\n";
 		 
-		s.insertBefore(73, n);
+		list.insertBefore(73, n);
 
-		std::cout << s.toString() << '\n';
+		std::cout << list.toString() << '\n';
 		
 	}
 
