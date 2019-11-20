@@ -11,22 +11,33 @@
 int main()
 {
 	{
-		List l;
+		List s;
 
-		for (int i = 0; i < 100; ++i)
+		for (int i = 0; i < 10; ++i)
 		{
-			l.push_front(i);
+			s.push_back(i);
 		}
 
-		Node* cur = l.getLast();
-		while (cur) {
-			std::cout << l.getDataAtNode(cur) << ", ";
-			cur = l.getPrev(cur);
-		}
+		std::cout << s.toString();
+		
+		void* n = s.getFirst();
+		s.insertBefore(42, n);
 
-		std::cout << "\n\n" << "destroyed " << Node::destroyed << '\n';
-		std::cout << "\n\n" << "created " << Node::created << '\n';
+		n = s.getNext(n);
+		n = s.getNext(n);
+		n = s.getNext(n);
+
+		void* tmp = s.getNext(n);
+		s.deleteAt(n);
+		n = tmp;
+		std::cout << "\n\nData: " << s.getDataAt(n) << "\n";
+		 
+		s.insertBefore(73, n);
+
+		std::cout << s.toString() << '\n';
+		
 	}
-	std::cout << "\n\n" << "destroyed " << Node::destroyed << '\n';
 
+	std::cout << "\n\n" << "destroyed " << Node::destroyed << '\n';
+	std::cout << "\n\n" << "created " << Node::created << '\n';
 }
