@@ -59,7 +59,7 @@ void List::deleteAt(void* p) {
 		cur->prev->next = cur->next;
 		cur->next->prev = cur->prev;
 	}
-
+	size_--;
 	delete cur;
 }
 
@@ -78,6 +78,7 @@ void List::insertBefore(int n, void* p) {
 		newNode->prev->next = newNode;
 		newNode->next->prev = newNode;
 	}
+	size_++;
 }
 
 
